@@ -11,8 +11,11 @@ app.use(bodyParser.urlencoded({
   extended: true
 })); // support encoded bodies
 
-app.get("/get_param_value/:osm_id/:param_id/:year/:month", async (req, res) => {
-  const result = await storage.getParamValue(req.params.osm_id,req.params.param_id,req.params.year,req.params.month);
+app.post("/get_param_for_osm_list/:param_id", async (req, res) => {
+ let year = 2017;
+ let month = 12;
+  console.debug('/get_param_value', req.body);
+  const result = await storage.getParamValue(req.body,req.params.param_id,year,month);
   res.json(result);
 });
 
