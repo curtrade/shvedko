@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({
 
 
 app.get("/get_regions", async (req, res) => {
+  console.debug('/get_regions started!');
   const regions = await storage.getRegions();
   res.json(regions);
 });
@@ -31,3 +32,5 @@ app.get("/get_microdistricts/:district", async (req, res) => {
   const microdistricts = await storage.getCities(req.params.district);
   res.json(microdistricts);
 });
+
+app.listen(config.web.port);

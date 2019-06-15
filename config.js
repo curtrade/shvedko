@@ -15,7 +15,7 @@ switch(mode){
     config.db = {
       host: 'localhost',
       port: '3306',
-      database: 'hackathon19',
+      database: 'shvedko',
       user: 'root',
       password: '',
       dateStrings: 'DATETIME'
@@ -25,13 +25,14 @@ switch(mode){
     }
     break;
   default:
+  //mysql://b9eb358e330c55:5b11a3eb@us-cdbr-iron-east-02.cleardb.net/heroku_fd6c06613258cdd?reconnect=true
     console.log('production service started!');
     config.db = {
       host: 'us-cdbr-iron-east-02.cleardb.net',
       port: '3306',
-      database: 'heroku_23964812090b83f',
-      user: 'b6b121b33eb5dd',
-      password:'13c8f812',
+      database: 'heroku_fd6c06613258cdd',
+      user: 'b9eb358e330c55',
+      password:'5b11a3eb',
       dateStrings: 'DATETIME'
     }
     config.web = {
