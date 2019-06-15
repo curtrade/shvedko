@@ -16,7 +16,12 @@ app.post("/get_param_for_osm_list/:param_id", async (req, res) => {
  let month = 12;
   console.debug('/get_param_value', req.body.osmIds);
   const result = await storage.getParamValue(req.body.osmIds,req.params.param_id,year,month);
-  res.json(result);
+
+  res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.end(JSON.stringify(result));
+
+  //res.json(result);
 });
 
 app.listen(config.web.port);
