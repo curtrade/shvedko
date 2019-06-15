@@ -14,8 +14,8 @@ app.use(bodyParser.urlencoded({
 app.post("/get_param_for_osm_list/:param_id", async (req, res) => {
  let year = 2017;
  let month = 12;
-  console.debug('/get_param_value', req.body);
-  const result = await storage.getParamValue(req.body,req.params.param_id,year,month);
+  console.debug('/get_param_value', req.body.osmIds);
+  const result = await storage.getParamValue(req.body.osmIds,req.params.param_id,year,month);
   res.json(result);
 });
 
