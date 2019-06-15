@@ -19,18 +19,23 @@ app.get("/get_regions", async (req, res) => {
 });
 
 app.get("/get_cities/:region", async (req, res) => {
-  const cities = await storage.getCities(req.params.region);
+  const cities = await storage.getCitiesByRegion(req.params.region);
   res.json(cities);
 });
 
 app.get("/get_districts/:city", async (req, res) => {
-  const districts = await storage.getCities(req.params.city);
+  const districts = await storage.getDistrictsByCity(req.params.city);
   res.json(districts);
 });
 
 app.get("/get_microdistricts/:district", async (req, res) => {
-  const microdistricts = await storage.getCities(req.params.district);
+  const microdistricts = await storage.getMicrodistrictsByDistrict(req.params.district);
   res.json(microdistricts);
+});
+
+app.get("/get_statistics/:microdistrict/:year/:month", async (req, res) => {
+  const statistics = await storage.getStatisticsByMicrodistrictAndPeriod(req.params.microdistrict,req.params.year,req.params.month);
+  res.json(statistics);
 });
 
 app.listen(config.web.port);

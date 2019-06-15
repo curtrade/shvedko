@@ -69,7 +69,7 @@ async function getMicrodistrictsByDistrict(districtId) {
   return rows;
 }
 async function getStatisticsByMicrodistrictAndPeriod(microdistrictId, year, month) {
-  let rows = await db.aquery("SELECT * FROM microdistrict WHERE microdistrictId=?, year=?, month=?",
+  let rows = await db.aquery("SELECT * FROM statistics WHERE microdistrict_id=? AND year=? AND month=?",
     [microdistrictId, year, month]
   );
   return rows;
