@@ -45,39 +45,12 @@ function handleDbDisconnect() {
 //Создание соединения MySQL при первом запуске приложения
 handleDbDisconnect();
 
-async function getRegions() {
-  let rows = await db.aquery("SELECT * FROM region ORDER BY title ASC");
-  return rows;
+async function getParamValue(osm_id, param_id, year, month) {
+  let rows = await db.aquery("SELECT * FROM stat WHERE osm_id=? AND param_id=? AND year=? AND month=?",[osm_id, param_id, year, month]);
+  return rows[0]?{value:rows[0].param_value}:{value:null};
 }
 
-async function getCitiesByRegion(regionId) {
-  let rows = await db.aquery("SELECT * FROM city WHERE region_id=? ORDER BY title ASC",
-    [regionId]
-  );
-  return rows;
-}
-async function getDistrictsByCity(cityId) {
-  let rows = await db.aquery("SELECT * FROM district WHERE city_id=? ORDER BY title ASC",
-    [cityId]
-  );
-  return rows;
-}
-async function getMicrodistrictsByDistrict(districtId) {
-  let rows = await db.aquery("SELECT * FROM microdistrict WHERE district_id=? ORDER BY title ASC",
-    [districtId]
-  );
-  return rows;
-}
-async function getStatisticsByMicrodistrictAndPeriod(microdistrictId, year, month) {
-  let rows = await db.aquery("SELECT * FROM statistics WHERE microdistrict_id=? AND year=? AND month=?",
-    [microdistrictId, year, month]
-  );
-  return rows;
-}
+
 module.exports = {
-  getRegions: getRegions,
-  getCitiesByRegion: getCitiesByRegion,
-  getDistrictsByCity: getDistrictsByCity,
-  getMicrodistrictsByDistrict: getMicrodistrictsByDistrict,
-  getStatisticsByMicrodistrictAndPeriod: getStatisticsByMicrodistrictAndPeriod
+  getParamValue: getParamValue
 };

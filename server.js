@@ -11,31 +11,9 @@ app.use(bodyParser.urlencoded({
   extended: true
 })); // support encoded bodies
 
-
-app.get("/get_regions", async (req, res) => {
-  console.debug('/get_regions started!');
-  const regions = await storage.getRegions();
-  res.json(regions);
-});
-
-app.get("/get_cities/:region", async (req, res) => {
-  const cities = await storage.getCitiesByRegion(req.params.region);
-  res.json(cities);
-});
-
-app.get("/get_districts/:city", async (req, res) => {
-  const districts = await storage.getDistrictsByCity(req.params.city);
-  res.json(districts);
-});
-
-app.get("/get_microdistricts/:district", async (req, res) => {
-  const microdistricts = await storage.getMicrodistrictsByDistrict(req.params.district);
-  res.json(microdistricts);
-});
-
-app.get("/get_statistics/:microdistrict/:year/:month", async (req, res) => {
-  const statistics = await storage.getStatisticsByMicrodistrictAndPeriod(req.params.microdistrict,req.params.year,req.params.month);
-  res.json(statistics);
+app.get("/get_param_value/:osm_id/:param_id/:year/:month", async (req, res) => {
+  const result = await storage.getParamValue(req.params.osm_id,req.params.param_id,req.params.year,req.params.month);
+  res.json(result);
 });
 
 app.listen(config.web.port);
