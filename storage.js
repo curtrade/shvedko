@@ -45,7 +45,7 @@ function handleDbDisconnect() {
 //Создание соединения MySQL при первом запуске приложения
 handleDbDisconnect();
 
-async function getParamValue(osm_id, param_id, year, month) {
+async function getParamValue(osm_ids, param_id, year, month) {
   let rows = await db.aquery("SELECT * FROM stat WHERE osm_id IN (?) AND param_id=? AND year=? AND month=?",[osm_ids, param_id, year, month]);
   return rows;
 }
