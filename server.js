@@ -20,7 +20,7 @@ app.get("/get_regions", async (req, res) => {
 
 app.get("/get_cities/:region", async (req, res) => {
   const cities = await storage.getCities(req.params.region);
-  res.json(regions);
+  res.json(cities);
 });
 
 app.get("/get_districts/:city", async (req, res) => {
