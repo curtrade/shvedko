@@ -22,22 +22,17 @@ function handleDbDisconnect() {
   };
 
   db.connect(function(err) {
-    // The server is either down
     if (err) {
-      // or restarting (takes a while sometimes).
       console.error("error when connecting to db:", err);
-      setTimeout(handleDbDisconnect, 2000); // We introduce a delay before attempting to reconnect,
-    } // to avoid a hot loop, and to allow our node script to
-  }); // process asynchronous requests in the megantime.
-  // If you're also serving http, display a 503 error.
+      setTimeout(handleDbDisconnect, 2000);
+    }
+  });
   db.on("error", function(err) {
     console.error("db error", err);
     if (err.code === "PROTOCOL_CONNECTION_LOST") {
-      // Connection to the MySQL server is usually
-      handleDbDisconnect(); // lost due to either server restart, or a
+      handleDbDisconnect();
     } else {
-      // connnection idle timeout (the wait_timeout
-      throw err; // server variable configures this)
+      throw err;
     }
   });
 }
@@ -45,13 +40,19 @@ function handleDbDisconnect() {
 //Создание соединения MySQL при первом запуске приложения
 handleDbDisconnect();
 
-async function getParamValue(osm_ids, param_id, year, month) {
-  let rows = await db.aquery("SELECT osm_id, param_value FROM stat WHERE osm_id IN (?) AND param_id=? AND year=? AND month=?",
-                             [osm_ids, param_id, year, month]);
+async function getOsmData(osm_ids, param_id) {
+  let values = await db.aquery("SELECT osm_id, year, month, param_value FROM stat WHERE osm_id IN (?) AND param_id=?",
+                             [osm_ids, param_id]);
   return rows;
+}
+
+async function getParams() {
+  let params = await db.aquery("SELECT id, name FROM param");
+  return params;
 }
 
 
 module.exports = {
-  getParamValue: getParamValue
+  getParams: getParams,
+  getOsmData: getOsmData
 };

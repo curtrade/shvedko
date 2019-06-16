@@ -11,17 +11,19 @@ app.use(bodyParser.urlencoded({
   extended: true
 })); // support encoded bodies
 
-app.post("/get_param_for_osm_list/:param_id", async (req, res) => {
- let year = 2017;
- let month = 12;
-  console.debug('/get_param_value', req.body.osmIds);
-  const result = await storage.getParamValue(req.body.osmIds,req.params.param_id,year,month);
-
-  res.setHeader('Content-Type', 'application/json');
+app.post("/get_osm_data/:paramId", async (req, res) => {
+  console.debug('/get_osm_data', req.body.osmIds);
+  const osmData = await storage.getOsmData(req.body.osmIds,req.params.paramId);
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.end(JSON.stringify(result));
+  res.end(JSON.stringify(osmData));
+  res.json(osmData);
+});
 
-  //res.json(result);
+app.get("/get_params", async (req, res) => {
+  console.debug('/get_params');
+  const params = await storage.getParams();
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.json(params);
 });
 
 app.listen(config.web.port);
