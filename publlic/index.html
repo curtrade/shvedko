@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ЖКХ</title>
+    <link href="/favicon.ico" rel="shortcut icon"/>
+
+    <script src="https://unpkg.com/osme"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=2e3bec2a-02b7-4225-b576-167bdff9e491" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/styles.css"/>
+
+    <script src="libs/jquery/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script src="libs/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+
+    <script src="js/util.js" type="text/javascript"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-2 mr-0" href="/">
+        <img src="img/logo.png" width="32" height="32"/>
+        <span>ЖКХ 4.0</span>
+    </a>
+    <span class="navbar-nav px-3" style="color: #fff; font-size: 125%;">
+        Гид по району - информационная реальность
+    </span>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <div class="list-group" id="data-selector" role="tablist"></div>
+                <div class="container-fluid mt-4" id="data-controls" style="display: none;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="period-range">Период <span id="period-value"></span></label>
+                            <input type="range" class="custom-range" id="period-range" min="0" max="0" step="1">
+                        </div>
+                    </div>
+                    <div class="row align-middle mt-2">
+                        <div class="col-md-1 ml-2" style="background-color: green;">&nbsp;</div>
+                        <div class="col-md-10" id="legend-green"></div>
+                    </div>
+                    <div class="row align-middle mt-2">
+                        <div class="col-md-1 ml-2" style="background-color: red;">&nbsp;</div>
+                        <div class="col-md-10" id="legend-red"></div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-0">
+            <div class="d-flex flex-wrap px-4 border-bottom" id="breadcrumbs"></div>
+            <div id="map"></div>
+        </main>
+    </div>
+</div>
+<div id="loadmask" class="lmask"></div>
+
+</body>
+</html>
