@@ -15,7 +15,6 @@ app.post("/get_osm_data/:paramId", async (req, res) => {
   console.debug('/get_osm_data', req.body.osmIds);
   const osmData = await storage.getOsmData(req.body.osmIds,req.params.paramId);
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.end(JSON.stringify(osmData));
   res.json(osmData);
 });
 
