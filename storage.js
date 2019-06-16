@@ -47,7 +47,7 @@ async function getOsmData(osm_ids, param_id) {
 }
 
 async function getParams() {
-  let params = await db.aquery("SELECT id, name FROM param");
+  let params = await db.aquery("SELECT id, name, legend, min_legend, max_legend FROM param");
   return params;
 }
 
