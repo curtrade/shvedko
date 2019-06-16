@@ -4,7 +4,6 @@ let express = require('express');
 let bodyParser = require('body-parser');
 let app = express();
 
-app.use("/public", express.static(__dirname + '/public'));
 app.use("/", express.static(__dirname + '/public'));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({
