@@ -211,3 +211,10 @@ body {
         -webkit-transform: rotate(360deg);
     }
 }
+
+.legend-gradient {
+    background: -moz-linear-gradient(90deg, rgba(0,255,0,0.6) 0%, rgba(255,0,0,0.6) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(0,255,0,0.6) 0%, rgba(255,0,0,0.6) 100%);
+    background: linear-gradient(90deg, rgba(0,255,0,0.6) 0%, rgba(255,0,0,0.6) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00ff00",endColorstr="#ff0000",GradientType=1);
+}

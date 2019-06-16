@@ -196,7 +196,7 @@ function setGeometryFillRate(osmId, percentage) {
     var g = osmGeoMap[osmId];
     if (g) {
         g.options.set({
-            fillColor: percentage >= 0 ? percentToColor(percentage, 0.5) : 'rgba(255,255,255,0)'
+            fillColor: percentage >= 0 ? percentToColor(percentage, 0.6) : 'rgba(255,255,255,0)'
         });
     }
 }
@@ -235,10 +235,11 @@ function loadData(type) {
                 maxPeriod = Math.max(maxPeriod, period);
             }
 
+            console.log(minPeriod, maxPeriod)
             var pr = $('#period-range')[0];
-            pr.min = minPeriod;
-            pr.max = maxPeriod;
-            pr.value = maxPeriod;
+            pr.min = minPeriod === Infinity ? 0 : minPeriod;
+            pr.max = maxPeriod === -Infinity ? 0 : maxPeriod;
+            pr.value = pr.max;
 
             var legend = legendInfoMap[type];
             if (legend) {
