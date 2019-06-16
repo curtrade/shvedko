@@ -41,9 +41,9 @@ function handleDbDisconnect() {
 handleDbDisconnect();
 
 async function getOsmData(osm_ids, param_id) {
-  let values = await db.aquery("SELECT osm_id, year, month, param_value FROM stat WHERE osm_id IN (?) AND param_id=?",
+  let osm_data = await db.aquery("SELECT osm_id, year, month, param_value FROM stat WHERE osm_id IN (?) AND param_id=?",
                              [osm_ids, param_id]);
-  return rows;
+  return osm_data;
 }
 
 async function getParams() {
