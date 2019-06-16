@@ -235,7 +235,6 @@ function loadData(type) {
                 maxPeriod = Math.max(maxPeriod, period);
             }
 
-            console.log(minPeriod, maxPeriod)
             var pr = $('#period-range')[0];
             pr.min = minPeriod === Infinity ? 0 : minPeriod;
             pr.max = maxPeriod === -Infinity ? 0 : maxPeriod;
@@ -251,6 +250,8 @@ function loadData(type) {
             }
 
             renderData(maxPeriod);
+
+            pr.focus();
         })
         .fail(function () {
             alert('Произошла ошибка при загрузке данных');
@@ -275,7 +276,7 @@ function renderData(period) {
 
     for (var osmId in osmGeoMap) {
         var el = data.values[osmId];
-        var v = el ? ((el - data.minValue) / zero * 100) : NaN;
+        var v = el >= 0 ? ((el - data.minValue) / zero * 100) : NaN;
 
         setGeometryFillRate(osmId, v);
         //console.log(osmId, v)
